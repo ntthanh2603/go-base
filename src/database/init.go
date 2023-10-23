@@ -1,14 +1,17 @@
-package db
+package database
 
 import (
+	env "gin-base/src/utils"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 var db *gorm.DB
 
-func New() {
-	dsn := "host=os user=gorm password=gorm dbname=gorm port=9920 sslmode=disable"
+func Connect() {
+	dsn := env.Load("POSTGRES_DSN")
+
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")

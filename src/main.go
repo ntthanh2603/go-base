@@ -2,12 +2,16 @@ package main
 
 import (
 	"gin-base/src/api/auth"
+	"gin-base/src/database"
 	"gin-base/src/routers"
+	env "gin-base/src/utils"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	env.Init()
+	database.Connect()
 	createServer(
 		// Pass controllers
 		[]routers.Controller{
