@@ -1,7 +1,7 @@
 package database
 
 import (
-	env "gin-base/src/utils"
+	env "gin-base/utils"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

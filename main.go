@@ -1,10 +1,10 @@
 package main
 
 import (
-	"gin-base/src/api/auth"
-	"gin-base/src/database"
-	"gin-base/src/routers"
-	env "gin-base/src/utils"
+	"gin-base/api/auth"
+	"gin-base/database"
+	"gin-base/routers"
+	env "gin-base/utils"
 
 	"github.com/gin-gonic/gin"
 )
