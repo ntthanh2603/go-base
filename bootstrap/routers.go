@@ -1,4 +1,4 @@
-package routers
+package bootstrap
 
 import "github.com/gin-gonic/gin"
 
@@ -14,7 +14,7 @@ type Controller func(api *gin.RouterGroup)
 // - r: The gin.Engine instance to connect the controllers to.
 // - basePath: The base path for the router group.
 // - ctrls: A slice of Controller functions to connect.
-func ConnectController(r *gin.Engine, basePath string, ctrls []Controller) {
+func ConnectControllers(r *gin.Engine, basePath string, ctrls []Controller) {
 	api := r.Group(basePath)
 
 	for _, ctrl := range ctrls {

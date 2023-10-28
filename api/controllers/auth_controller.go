@@ -1,6 +1,8 @@
-package auth
+package controllers
 
 import (
+	"gin-base/services"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,7 +14,7 @@ func AuthController(r *gin.RouterGroup) {
 
 	authController := r.Group("/auth")
 
-	authService := AuthService()
+	authService := services.AuthService()
 
 	authController.GET("/login", authService.Login)
 }

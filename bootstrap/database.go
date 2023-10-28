@@ -1,4 +1,4 @@
-package database
+package bootstrap
 
 import (
 	env "gin-base/utils"
@@ -9,7 +9,7 @@ import (
 
 var db *gorm.DB
 
-func Connect() {
+func DatabaseConnect() {
 	dsn := env.Load("POSTGRES_DSN")
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -20,7 +20,6 @@ func Connect() {
 	// Migrate the schema
 	db.AutoMigrate()
 }
-
 func Repository(value interface{}) *gorm.DB {
 	return db.Model(value)
 }
