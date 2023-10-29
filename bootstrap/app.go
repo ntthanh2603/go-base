@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"gin-base/api/controllers"
+	"gin-base/configs"
 	env "gin-base/utils"
 
 	"github.com/gin-gonic/gin"
@@ -14,6 +15,7 @@ import (
 func App() {
 	env.Init()
 	DatabaseConnect()
+
 	createServer(
 		// Pass controllers
 		[]Controller{
@@ -25,7 +27,7 @@ func App() {
 		[]gin.HandlerFunc{},
 
 		// Custom port number
-		":3000")
+		configs.Port)
 }
 
 // createServer creates a Gin server with the specified controllers, middlewares, and port.
@@ -39,7 +41,7 @@ func App() {
 // - a pointer to a gin.Engine object representing the Gin server.
 func createServer(controllers []Controller, middlewares []gin.HandlerFunc, port string) *gin.Engine {
 	r := gin.Default()
-	ConnectControllers(r, "/api", controllers)
+	ConnectControllers(r, configs.BasePath, controllers)
 	r.Run(port)
 	return r
 }
