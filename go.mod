@@ -1,4 +1,4 @@
-module gin-base
+module go-base
 
 go 1.21.3
 

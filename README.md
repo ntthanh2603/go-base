@@ -1,8 +1,9 @@
-**🧡Go Base is a [Gin-based](https://gin-gonic.com/) project that provides a quick way to build Rest APIs.**
-    
+**🧡Go Base is a [go-based](https://gin-gonic.com/) project that provides a quick way to build Rest APIs.**
+
 # ⚡️ Quickstart
 
 ## App
+
 ```go
 func App() {
 	serverConfig := ServerConfig{
@@ -24,7 +25,9 @@ func App() {
 }
 
 ```
+
 ## Controller
+
 ```go
 func MyController(r *gin.RouterGroup) {
     myController := r.Group("/my-controller")
@@ -40,6 +43,7 @@ func MyController(r *gin.RouterGroup) {
 ```
 
 ## Service
+
 ```go
 type MyServiceType struct {
 }

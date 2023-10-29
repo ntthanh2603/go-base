@@ -1,7 +1,7 @@
 package bootstrap
 
 import (
-	env "gin-base/utils"
+	env "go-base/utils"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

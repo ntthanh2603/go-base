@@ -1,7 +1,12 @@
 package main
 
-import "gin-base/bootstrap"
+import (
+	"go-base/bootstrap"
+	"go-base/configs"
+)
 
 func main() {
-	bootstrap.App()
+	app := bootstrap.App()
+
+	app.Run(configs.Port)
 }

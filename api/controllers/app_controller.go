@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"go-base/services"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -9,10 +11,14 @@ import (
 // It takes in a *gin.RouterGroup parameter named "r" which represents the router group that the function will be added to.
 //
 // There are no return types specified for this function.
-func AppController(r *gin.RouterGroup) {
-	r.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"message": "Hello, world!",
-		})
-	})
+func AppController() *gin.Engine {
+	appService := services.AppService()
+	appController := ControllerBase{
+		basePath: "/hello-world",
+		routes: []RouteBase{
+			Get("/", appService.HelloWorldGet),
+			Post("/", appService.HelloWorldPost),
+		},
+	}
+	return Controller(appController)
 }

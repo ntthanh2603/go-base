@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"gin-base/dto"
-	"gin-base/services"
-	"gin-base/validation"
+	"go-base/dto"
+	"go-base/services"
+	"go-base/validation"
 
 	"github.com/gin-gonic/gin"
 )

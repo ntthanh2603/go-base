@@ -1,10 +1,9 @@
 package bootstrap
 
 import (
-	"gin-base/api/controllers"
-	"gin-base/api/middlewares"
-	"gin-base/configs"
-	env "gin-base/utils"
+	"go-base/api/middlewares"
+	"go-base/configs"
+	env "go-base/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,19 +11,17 @@ import (
 // App initializes the application.
 //
 // It initializes the environment, connects to the database, and creates a server.
-func App() {
+func App() *gin.Engine {
 	// Initialize the environment
 	env.Init()
 
 	// Connect to the database
 	DatabaseConnect()
-
 	// Define the server configuration
 	serverConfig := ServerConfig{
 
 		Controllers: []Controller{
-			controllers.AuthController,
-			controllers.AppController,
+			//   Controller(controllers.AppController()),
 		},
 
 		Middlewares: []gin.HandlerFunc{
@@ -38,5 +35,5 @@ func App() {
 	}
 
 	// Create the server
-	CreateServer(serverConfig)
+	return CreateServer(serverConfig)
 }
