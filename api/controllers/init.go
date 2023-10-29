@@ -37,6 +37,24 @@ type RouteBase struct {
 	method   string
 }
 
+type MethodHandler struct {
+	basePath string
+	handler  gin.HandlerFunc
+	configs  MethodHandlerConfigs
+}
+
+type MethodHandlerConfigs struct {
+	openApi OpenApiConfigs
+}
+
+type OpenApiConfigs struct {
+	title       string
+	description string
+	version     string
+	tags        []string
+	success     string
+}
+
 func Get(basePath string, handler gin.HandlerFunc) RouteBase {
 	return RouteBase{
 		basePath: basePath,
