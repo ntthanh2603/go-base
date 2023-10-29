@@ -16,32 +16,17 @@ func App() {
 	env.Init()
 	DatabaseConnect()
 
-	createServer(
-		// Pass controllers
-		[]Controller{
+	serverConfig := ServerConfig{
+
+		Controllers: []Controller{
 			controllers.AuthController,
 			controllers.AppController,
 		},
 
-		// Pass middlewares
-		[]gin.HandlerFunc{},
+		Middlewares: []gin.HandlerFunc{},
 
-		// Custom port number
-		configs.Port)
-}
+		Port: configs.Port,
+	}
 
-// createServer creates a Gin server with the specified controllers, middlewares, and port.
-//
-// Parameters:
-// - controllers: a slice of routers.Controller objects that define the API endpoints.
-// - middlewares: a slice of gin.HandlerFunc objects that define the middleware functions.
-// - port: a string representing the port number on which the server will listen.
-//
-// Returns:
-// - a pointer to a gin.Engine object representing the Gin server.
-func createServer(controllers []Controller, middlewares []gin.HandlerFunc, port string) *gin.Engine {
-	r := gin.Default()
-	ConnectControllers(r, configs.BasePath, controllers)
-	r.Run(port)
-	return r
+	CreateServer(serverConfig)
 }
