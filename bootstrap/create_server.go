@@ -22,6 +22,9 @@ func CreateServer(config ServerConfig) *gin.Engine {
 	// Connect the controllers to the server
 	ConnectControllers(r, configs.BasePath, config.Controllers)
 
+	// Auto apply middlewares
+	ApplyMiddlewares(r, config.Middlewares)
+
 	// Run the server on the specified port
 	r.Run(config.Port)
 

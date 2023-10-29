@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"gin-base/api/controllers"
+	"gin-base/api/controllers/middlewares"
 	"gin-base/configs"
 	env "gin-base/utils"
 
@@ -24,8 +25,10 @@ func App() {
 			controllers.AuthController,
 			controllers.AppController,
 		},
-		Middlewares: []gin.HandlerFunc{},
-		Port:        configs.Port,
+		Middlewares: []gin.HandlerFunc{
+			middlewares.Cors(),
+		},
+		Port: configs.Port,
 	}
 
 	// Create the server
