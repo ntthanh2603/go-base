@@ -18,6 +18,7 @@ func App() {
 		// Pass controllers
 		[]Controller{
 			controllers.AuthController,
+			controllers.AppController,
 		},
 
 		// Pass middlewares

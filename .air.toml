@@ -1,0 +1,8 @@
+# air.toml
+root = "."  # This should be the root directory of your Go project
+tmp_dir = "tmp"
+build = "go build"
+binary = "your-app-binary"  # Replace with your application's binary name
+port = ":3000"  # Specify the port you want your app to run on
+log = "logs/air.log"
+clear = true
