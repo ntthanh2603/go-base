@@ -9,6 +9,10 @@ import (
 
 var db *gorm.DB
 
+// DatabaseConnect establishes a connection to the database.
+//
+// It does not take any parameters.
+// It returns a pointer to a gorm.DB object.
 func DatabaseConnect() *gorm.DB {
 	dsn := env.Load("POSTGRES_DSN")
 

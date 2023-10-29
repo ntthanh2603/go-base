@@ -11,22 +11,23 @@ import (
 // App initializes the application.
 //
 // It initializes the environment, connects to the database, and creates a server.
-// The function
 func App() {
+	// Initialize the environment
 	env.Init()
+
+	// Connect to the database
 	DatabaseConnect()
 
+	// Define the server configuration
 	serverConfig := ServerConfig{
-
 		Controllers: []Controller{
 			controllers.AuthController,
 			controllers.AppController,
 		},
-
 		Middlewares: []gin.HandlerFunc{},
-
-		Port: configs.Port,
+		Port:        configs.Port,
 	}
 
+	// Create the server
 	CreateServer(serverConfig)
 }
