@@ -21,13 +21,17 @@ func App() {
 
 	// Define the server configuration
 	serverConfig := ServerConfig{
+
 		Controllers: []Controller{
 			controllers.AuthController,
 			controllers.AppController,
 		},
+
 		Middlewares: []gin.HandlerFunc{
 			middlewares.Cors(),
+			middlewares.Custom(),
 		},
+
 		Port: configs.Port,
 	}
 
