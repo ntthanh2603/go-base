@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"gin-base/domain"
+	"gin-base/dto"
 	"gin-base/services"
 	"gin-base/validation"
 
@@ -11,5 +11,5 @@ import (
 func AuthController(r *gin.RouterGroup) {
 	authController := r.Group("/auth")
 	authService := services.AuthService()
-	authController.POST("/login", validation.Body(&domain.LoginDto{}), authService.Login)
+	authController.POST("/login", validation.Body(&dto.LoginDto{}), authService.Login)
 }
