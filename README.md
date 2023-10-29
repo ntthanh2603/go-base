@@ -1,60 +1,74 @@
-**🧡Go Base is a [go-based](https://gin-gonic.com/) project that provides a quick way to build Rest APIs.**
-
+**🧡Go Base is a [Gin-based](https://gin-gonic.com/) project that provides a quick way to build Rest APIs.**
+    
 # ⚡️ Quickstart
 
 ## App
-
 ```go
-func App() {
+func App() *gin.Engine {
+	// Initialize the environment
+	env.Init()
+
+	// Connect to the database
+	DatabaseConnect()
+	// Define the server configuration
 	serverConfig := ServerConfig{
 
 		Controllers: []Controller{
-			controllers.MyController,
+			controllers.AppController()
 		},
 
 		Middlewares: []gin.HandlerFunc{
-			middlewares.AuthGuard(),
+			middlewares.Cors(),
+			middlewares.Custom(),
 		},
 
-		Port: ":3000",
+		Port: configs.Port,
 
-		DebugLogger: true, // optional
+		DebugLogger: true,
 	}
 
-	CreateServer(serverConfig)
+	// Create the server
+	return CreateServer(serverConfig)
+
 }
 
 ```
-
 ## Controller
-
 ```go
-func MyController(r *gin.RouterGroup) {
-    myController := r.Group("/my-controller")
-    myService := services.MyService()
-    myController.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Hello, world!",
-		})
-	})
-
-    myController.POST("/",  myService.HelloWorld)
+func AppController() *gin.Engine {
+	appService := services.AppService()
+	appController := ControllerBase{
+		basePath: "/hello-world",
+		routes: []RouteBase{
+			Get("/", appService.HelloWorldGet),
+			Post("/", appService.HelloWorldPost),
+		},
+	}
+	return Controller(appController)
 }
 ```
 
 ## Service
-
 ```go
-type MyServiceType struct {
+func AppService() *AppServiceType {
+	return &AppServiceType{}
 }
 
-func MyService() *myServiceType {
-	return &myServiceType{}
-}
-
-func (myService *MyServiceType) HelloWorld(c *gin.Context) {
+func (AppService *AppServiceType) HelloWorldPost(c *gin.Context) {
 	c.JSON(200, gin.H{
-			"message": "Hello, world!",
-		})
+		"message": "[POST] Hello World",
+	})
 }
+
+func (AppService *AppServiceType) HelloWorldGet(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"message": "[GET] Hello World",
+	})
+}
+
+```
+
+## Env
+```
+POSTGRES_DSN="host=<replace your host> user=<replace your username> password=<replace your password> dbname=<replace your database name> port=<replace your database port>" 
 ```
