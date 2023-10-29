@@ -33,6 +33,8 @@ func App() {
 		},
 
 		Port: configs.Port,
+
+		DebugLogger: true,
 	}
 
 	// Create the server

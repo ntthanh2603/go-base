@@ -12,12 +12,16 @@ type ServerConfig struct {
 	Controllers []Controller
 	Middlewares []gin.HandlerFunc
 	Port        string
+	DebugLogger bool
 }
 
 // CreateServer creates a new Gin server with the given configuration.
 // It takes a ServerConfig parameter that specifies the server's configuration.
 // The function returns a *gin.Engine, which is the created Gin server.
 func CreateServer(config ServerConfig) *gin.Engine {
+	if !config.DebugLogger {
+		gin.SetMode(gin.ReleaseMode)
+	}
 	// Create a new Gin server with default middleware
 	r := gin.Default()
 
