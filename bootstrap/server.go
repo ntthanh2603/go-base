@@ -64,14 +64,19 @@ func applyMiddlewares(r *gin.Engine, middlewares []gin.HandlerFunc) {
 // - basePath: The base path for the router group.
 // - ctrls: A slice of Controller functions to connect.
 
+// connectControllers registers the controllers with the specified base path
 func connectControllers(r *gin.Engine, basePath string, ctrls []Controller) {
+	// Redirect root path to the base path if it is not empty
 	if basePath != "" {
-		r.GET("/", func(c *gin.Context) {
+		r.Any("/", func(c *gin.Context) {
 			c.Redirect(http.StatusMovedPermanently, basePath)
 		})
 	}
+
+	// Create a new router group with the base path
 	api := r.Group(basePath)
 
+	// Register each controller with the router group
 	for _, ctrl := range ctrls {
 		ctrl(api)
 	}
