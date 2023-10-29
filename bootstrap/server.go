@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"gin-base/configs"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -64,6 +65,11 @@ func applyMiddlewares(r *gin.Engine, middlewares []gin.HandlerFunc) {
 // - ctrls: A slice of Controller functions to connect.
 
 func connectControllers(r *gin.Engine, basePath string, ctrls []Controller) {
+	if basePath != "" {
+		r.GET("/", func(c *gin.Context) {
+			c.Redirect(http.StatusMovedPermanently, basePath)
+		})
+	}
 	api := r.Group(basePath)
 
 	for _, ctrl := range ctrls {

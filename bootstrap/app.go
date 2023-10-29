@@ -2,7 +2,7 @@ package bootstrap
 
 import (
 	"gin-base/api/controllers"
-	"gin-base/api/controllers/middlewares"
+	"gin-base/api/middlewares"
 	"gin-base/configs"
 	env "gin-base/utils"
 
