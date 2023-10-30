@@ -1,7 +1,6 @@
 package bootstrap
 
 import (
-	"go-base/api/controllers"
 	"go-base/driver"
 
 	"github.com/gin-gonic/gin"
@@ -32,7 +31,9 @@ func CreateServer(config ServerConfig) *gin.Engine {
 	applyMiddlewares(driver.Instance, config.Middlewares)
 
 	// Connect the controllers to the server
-	controllers.AppController()
+	for _, controller := range config.Controllers {
+		controller()
+	}
 
 	// Run the server on the specified port
 	driver.Instance.Run(config.Port)

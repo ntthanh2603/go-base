@@ -1,6 +1,7 @@
 package bootstrap
 
 import (
+	"go-base/api/controllers"
 	"go-base/api/middlewares"
 	"go-base/configs"
 	env "go-base/utils"
@@ -21,7 +22,7 @@ func App() *gin.Engine {
 	serverConfig := ServerConfig{
 
 		Controllers: []Controller{
-			//   Controller(controllers.AppController()),
+			controllers.AppController,
 		},
 
 		Middlewares: []gin.HandlerFunc{
