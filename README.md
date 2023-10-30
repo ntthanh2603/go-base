@@ -37,35 +37,37 @@ func App() *gin.Engine {
 ```go
 func AppController() *gin.Engine {
 	appService := services.AppService()
-	appController := ControllerBase{
-		basePath: "/hello-world",
-		routes: []RouteBase{
-			Get("/", appService.HelloWorldGet),
-			Post("/", appService.HelloWorldPost),
-		},
-	}
-	return Controller(appController)
+	return Controller("/hello-world",
+		Get("/",
+		   func() any {
+		   	return appService.HelloWorldGet()
+		   },
+		   UseGuard(TestGuard),
+		),
+	)
 }
 ```
 
 ## Service
 ```go
+package services
+
+type AppServiceType struct {
+}
+
 func AppService() *AppServiceType {
 	return &AppServiceType{}
 }
 
-func (AppService *AppServiceType) HelloWorldPost(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "[POST] Hello World",
-	})
+type HelloWorldResponse struct {
+	Message string `json:"message"`
 }
 
-func (AppService *AppServiceType) HelloWorldGet(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "[GET] Hello World",
-	})
+func (AppService *AppServiceType) HelloWorldGet() HelloWorldResponse {
+	return HelloWorldResponse{
+		Message: "[GET] Hello World",
+	}
 }
-
 ```
 
 ## Env
